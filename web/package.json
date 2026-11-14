@@ -1,0 +1,17 @@
+{
+  "name": "aovocl-docs",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AovoCL 文档站（VitePress）",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/gen-tools.mjs && vitepress dev docs",
+    "build": "node scripts/gen-tools.mjs && vitepress build docs",
+    "preview": "vitepress preview docs",
+    "gen": "node scripts/gen-tools.mjs"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "vitepress": "^1.6.4"
+  }
+}

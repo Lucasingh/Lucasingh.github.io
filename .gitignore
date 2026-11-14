@@ -1,0 +1,24 @@
+# .NET 构建产物
+.dotnet/
+bin/
+obj/
+.vs/
+*.user
+
+# 本地测试与基准目录（不入库）
+bench/
+bench2/
+bench3/
+bench4/
+bench-jre/
+testgame/
+
+# 文档站
+web/node_modules/
+web/docs/.vitepress/dist/
+web/docs/.vitepress/cache/
+web/docs/.vitepress/.temp/
+web/docs/public/tools.json
+
+# 杂项
+*.log
