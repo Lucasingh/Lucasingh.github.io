@@ -37,8 +37,9 @@ jobs:
         working-directory: web
         run: npm run build
         env:
-          # GitHub Pages 项目站点路径为 /<仓库名>/，这里自动取当前仓库名
-          DOCS_BASE: /${{ github.event.repository.name }}/
+          # 用户站点（<name>.github.io）部署在根路径，base 必须为 /；
+          # 普通项目站点则部署在 /<仓库名>/ 下
+          DOCS_BASE: ${{ endsWith(github.event.repository.name, '.github.io') && '/' || format('/{0}/', github.event.repository.name) }}
 
       - uses: actions/configure-pages@v5
 
