@@ -8,24 +8,14 @@ tags: [安装, 启动, 入门]
 
 ## 系统要求
 
-- Windows 10 及以上、主流 Linux 发行版，或 macOS
-- 已安装 .NET 8 运行时（通过源码运行时需要 .NET 8 SDK）
+- Windows 10 及以上（当前发布的安装包为 Windows x64 自包含版本，无需另装 .NET）
 - 至少 2 GB 可用内存，建议为游戏预留 4 GB
 
 ## 获取启动器
 
-当前版本以源码方式运行：
+到[下载页](/download)获取最新 Windows 版本（自包含运行时，解压即用）。
 
-```powershell
-# 仓库根目录下
-C:\AovoCL\.dotnet\dotnet.exe run --project src\AovoCL.Desktop
-```
-
-也可以直接运行已编译的桌面端：
-
-```powershell
-C:\AovoCL\src\AovoCL.Desktop\bin\Debug\net8.0\AovoCL.Desktop.exe
-```
+启动器源码不对外分发；仓库仅托管文档站与构建产物。
 
 ## 首次启动
 

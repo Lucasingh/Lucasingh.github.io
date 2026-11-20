@@ -91,3 +91,24 @@
 .VPFooter {
   border-top: 1px solid var(--vp-c-divider);
 }
+
+/* 下载按钮 */
+.download-button {
+  display: inline-block;
+  margin: 8px 0 24px;
+  padding: 12px 26px;
+  border-radius: 22px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(120deg, #2f6feb, #34c3a0);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(47, 111, 235, 0.28);
+  color: #fff;
+}
+

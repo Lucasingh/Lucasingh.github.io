@@ -18,15 +18,22 @@ export default defineConfig({
   ],
   themeConfig: {
     nav: [
+      { text: '下载', link: '/download' },
       { text: '指南', link: '/guide/getting-started', activeMatch: '/guide/' },
       { text: '参考', link: '/reference/architecture', activeMatch: '/reference/' },
       { text: 'tools.json', link: '/tools.json' }
     ],
     sidebar: [
       {
+        text: '开始',
+        items: [
+          { text: '下载启动器', link: '/download' },
+          { text: '快速开始', link: '/guide/getting-started' }
+        ]
+      },
+      {
         text: '指南',
         items: [
-          { text: '快速开始', link: '/guide/getting-started' },
           { text: '版本管理', link: '/guide/version-manager' },
           { text: '常见问题', link: '/guide/faq' }
         ]

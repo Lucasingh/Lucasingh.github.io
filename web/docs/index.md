@@ -9,14 +9,14 @@ hero:
   tagline: 参考 PCL2 架构打造 · Windows / Linux / macOS 通用 · 原版一键启动
   actions:
     - theme: brand
+      text: 下载启动器
+      link: /download
+    - theme: alt
       text: 快速开始
       link: /guide/getting-started
     - theme: alt
       text: 常见问题
       link: /guide/faq
-    - theme: alt
-      text: 下载 tools.json
-      link: /tools.json
 
 features:
   - title: 原版一键启动
@@ -45,6 +45,7 @@ features:
 
 | 文档 | 内容 |
 | --- | --- |
+| [下载启动器](/download) | 最新版本、安装步骤、系统要求、SHA256 校验 |
 | [快速开始](/guide/getting-started) | 系统要求、首次启动流程、下载调优、目录布局 |
 | [版本管理](/guide/version-manager) | 在线清单、下载与修复、重命名、删除、打开目录 |
 | [常见问题](/guide/faq) | 启动无反应、Java 不匹配、下载慢、离线验证提示 |
