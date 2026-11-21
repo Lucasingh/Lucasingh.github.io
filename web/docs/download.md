@@ -8,9 +8,17 @@ tags: [下载, 安装]
 
 当前最新版本：**v0.2.0**，适用于 Windows 10 / 11（x64），已内置 .NET 8 运行时，通过安装程序部署，无需手动解压。
 
-<a class="download-button" href="https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.0/AovoCL-Setup-0.2.0-win-x64.exe">下载 AovoCL v0.2.0 安装包（Windows x64 · 29.7 MB）</a>
+## 下载方式
 
-所有版本与更新记录：[GitHub Releases](https://github.com/Lucasingh/Lucasingh.github.io/releases)
+国内用户推荐使用蓝奏云网盘下载；GitHub Release 适合海外网络或作为备用源。
+
+<a class="download-button" href="https://wwbgb.lanzoul.com/iTSFX4gvk4ne" target="_blank" rel="noopener noreferrer">蓝奏云网盘下载（国内推荐 · Windows x64 · 29.7 MB）</a>
+
+| 下载方式 | 链接 | 说明 |
+| --- | --- | --- |
+| 蓝奏云网盘（推荐） | [打开下载页](https://wwbgb.lanzoul.com/iTSFX4gvk4ne) | 国内访问通常更快；提取密码：`7obm` |
+| GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.0/AovoCL-Setup-0.2.0-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
+| GitHub Releases 列表 | [查看全部版本](https://github.com/Lucasingh/Lucasingh.github.io/releases) | 可查看历史版本与更新记录 |
 
 ## 安装步骤
 
