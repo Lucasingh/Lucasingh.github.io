@@ -12,11 +12,11 @@ tags: [下载, 安装]
 
 国内用户推荐使用蓝奏云网盘下载；GitHub Release 适合海外网络或作为备用源。
 
-<a class="download-button" href="https://wwbgb.lanzoul.com/iTSFX4gvk4ne" target="_blank" rel="noopener noreferrer">蓝奏云网盘下载（国内推荐 · Windows x64 · 29.7 MB）</a>
+<a class="download-button" href="https://wwbgb.lanzoul.com/b01i61bprg" target="_blank" rel="noopener noreferrer">蓝奏云网盘下载（国内推荐 · Windows x64 · 36.9 MB）</a>
 
 | 下载方式 | 链接 | 说明 |
 | --- | --- | --- |
-| 蓝奏云网盘（推荐） | [打开下载页](https://wwbgb.lanzoul.com/iTSFX4gvk4ne) | 国内访问通常更快；提取密码：`7obm` |
+| 蓝奏云网盘（推荐） | [打开下载页](https://wwbgb.lanzoul.com/b01i61bprg) | 国内访问通常更快；提取密码：`i3xf` |
 | GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.3/AovoCL-Setup-0.2.3-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
 | GitHub Releases 列表 | [查看全部版本](https://github.com/Lucasingh/Lucasingh.github.io/releases) | 可查看历史版本与更新记录 |
 
