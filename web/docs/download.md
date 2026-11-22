@@ -6,7 +6,7 @@ tags: [下载, 安装]
 
 # 下载启动器
 
-当前最新版本：**v0.2.0**，适用于 Windows 10 / 11（x64），已内置 .NET 8 运行时，通过安装程序部署，无需手动解压。
+当前最新版本：**v0.2.2**，适用于 Windows 10 / 11（x64），已内置 .NET 8 运行时，通过安装程序部署，无需手动解压。
 
 ## 下载方式
 
@@ -17,12 +17,12 @@ tags: [下载, 安装]
 | 下载方式 | 链接 | 说明 |
 | --- | --- | --- |
 | 蓝奏云网盘（推荐） | [打开下载页](https://wwbgb.lanzoul.com/iTSFX4gvk4ne) | 国内访问通常更快；提取密码：`7obm` |
-| GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.0/AovoCL-Setup-0.2.0-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
+| GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.2/AovoCL-Setup-0.2.2-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
 | GitHub Releases 列表 | [查看全部版本](https://github.com/Lucasingh/Lucasingh.github.io/releases) | 可查看历史版本与更新记录 |
 
 ## 安装步骤
 
-1. 下载 `AovoCL-Setup-0.2.0-win-x64.exe`。
+1. 下载 `AovoCL-Setup-0.2.2-win-x64.exe`。
 2. 双击安装包并按向导操作；默认仅安装到当前用户目录，无需管理员权限。
 3. 可按需勾选「创建桌面快捷方式」，安装完成后从开始菜单或桌面启动 AovoCL。
 4. 首次启动后在「设置」里确认游戏目录，再到「下载」页选择版本，等待文件补齐后点击启动。
@@ -49,14 +49,31 @@ Windows SmartScreen 可能提示「已保护你的电脑」，这是因为可执
 下载完成后可以核对 SHA256，确认文件完整：
 
 ```powershell
-Get-FileHash .\AovoCL-Setup-0.2.0-win-x64.exe -Algorithm SHA256
+Get-FileHash .\AovoCL-Setup-0.2.2-win-x64.exe -Algorithm SHA256
 ```
 
 ```text
-b9a516ca60ddc33ab5ca63a8e78ad6e340877cf24855c93f0e923e1bc2c082c7
+18121716b0bc5e5942841fc1bff682117f56f4ca932bffa8334550eb07ce7cd8
 ```
 
 ## 版本说明
+
+### v0.2.2
+
+- 更新包下载提速：下载前自动测速，从多个下载源中挑选最快的一个
+- 新增 GitHub 加速镜像作为备用下载源，直连不畅时可自动切换
+- 改为多连接分段下载，大安装包速度明显提升
+- 遇到下载源限流会自动退避并从断点续传，不再整包重下
+- 状态栏在下载更新时显示实时速度
+
+### v0.2.1
+
+- 启动时自动检查更新，发现新版本会展示更新内容，可选择立即更新或稍后
+- 设置页新增「检查更新」，可查看当前版本并手动检查
+- 下载总览显示阶段总进度、下载速度、本批剩余文件与当前文件
+- 下载页新增资源类型与加载器入口，Mod、整合包、Forge 等将陆续支持
+- 启动页只显示已安装完成的版本，重命名后的版本也能正常显示与启动
+- 新增 AovoCL 风格标题栏与按钮、列表、进度条、导航收起展开动画
 
 ### v0.2.0
 
