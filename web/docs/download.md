@@ -6,23 +6,23 @@ tags: [下载, 安装]
 
 # 下载启动器
 
-当前最新版本：**v0.2.3**，适用于 Windows 10 / 11（x64），已内置 .NET 8 运行时，通过安装程序部署，无需手动解压。
+当前最新版本：**v0.2.4**，适用于 Windows 10 / 11（x64），已内置 .NET 8 运行时，通过安装程序部署，无需手动解压。
 
 ## 下载方式
 
 国内用户推荐使用蓝奏云网盘下载；GitHub Release 适合海外网络或作为备用源。
 
-<a class="download-button" href="https://wwbgb.lanzoul.com/b01i61bprg" target="_blank" rel="noopener noreferrer">蓝奏云网盘下载（国内推荐 · Windows x64 · 36.9 MB）</a>
+<a class="download-button" href="https://wwbgb.lanzoul.com/b01i61bprg" target="_blank" rel="noopener noreferrer">蓝奏云网盘下载（国内推荐 · Windows x64 · 31.4 MB）</a>
 
 | 下载方式 | 链接 | 说明 |
 | --- | --- | --- |
 | 蓝奏云网盘（推荐） | [打开下载页](https://wwbgb.lanzoul.com/b01i61bprg) | 国内访问通常更快；提取密码：`i3xf` |
-| GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.3/AovoCL-Setup-0.2.3-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
+| GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.4/AovoCL-Setup-0.2.4-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
 | GitHub Releases 列表 | [查看全部版本](https://github.com/Lucasingh/Lucasingh.github.io/releases) | 可查看历史版本与更新记录 |
 
 ## 安装步骤
 
-1. 下载 `AovoCL-Setup-0.2.3-win-x64.exe`。
+1. 下载 `AovoCL-Setup-0.2.4-win-x64.exe`。
 2. 双击安装包并按向导操作；默认仅安装到当前用户目录，无需管理员权限。
 3. 可按需勾选「创建桌面快捷方式」，安装完成后从开始菜单或桌面启动 AovoCL。
 4. 首次启动后在「设置」里确认游戏目录，再到「下载」页选择版本，等待文件补齐后点击启动。
@@ -49,14 +49,21 @@ Windows SmartScreen 可能提示「已保护你的电脑」，这是因为可执
 下载完成后可以核对 SHA256，确认文件完整：
 
 ```powershell
-Get-FileHash .\AovoCL-Setup-0.2.3-win-x64.exe -Algorithm SHA256
+Get-FileHash .\AovoCL-Setup-0.2.4-win-x64.exe -Algorithm SHA256
 ```
 
 ```text
-4de18f62322925e3a6dafafc4754bd72358f25f24c554788b50a2e134b3bfe4f
+ea11d809e6db21f3adab4471ec0df9f31c01510f5f0132fd59c606f06085f9e0
 ```
 
 ## 版本说明
+
+### v0.2.4
+
+- 安装包改为自带 .NET 8 运行时，不再要求目标电脑预装 .NET，修复部分电脑提示缺少 .NET 无法启动的问题
+- 更新窗口支持取消下载与失败重试
+- 更新包下载最多 32 线程分段，自动选择最快下载源
+- 修复 BMCLAPI 版本清单重定向导致的「版本列表获取失败」，镜像不可用时自动回退官方源
 
 ### v0.2.3
 
