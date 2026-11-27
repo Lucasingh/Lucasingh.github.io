@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="离线账户">
+  <defs>
+    <linearGradient id="i5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b86f0"/><stop offset="1" stop-color="#34c3a0"/>
+    </linearGradient>
+  </defs>
+  <path d="M12 1.8 20.4 5v7c0 5.3-3.6 9.1-8.4 11-4.8-1.9-8.4-5.7-8.4-11V5L12 1.8Z" fill="url(#i5)"/>
+  <path d="M8.2 11.9 10.9 14.6 16 9.5l1.6 1.6-6.7 6.7-4.3-4.3 1.6-1.6Z" fill="#fff"/>
+</svg>

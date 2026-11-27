@@ -6,20 +6,53 @@ tags: [下载, 安装]
 
 # 下载启动器
 
-当前最新版本：**v0.2.4**，适用于 Windows 10 / 11（x64），已内置 .NET 8 运行时，通过安装程序部署，无需手动解压。
+<div class="dl-hero">
+  <div class="dl-hero__left">
+    <span class="dl-hero__label">最新版本</span>
+    <span class="dl-hero__ver">v0.2.4</span>
+  </div>
+  <div class="dl-hero__right">
+    <span>Windows 10 / 11 · x64</span>
+    <span>自带 .NET 8 运行时</span>
+    <span>安装包 31.4 MB</span>
+  </div>
+</div>
 
 ## 下载方式
 
 国内用户推荐使用蓝奏云网盘下载；GitHub Release 适合海外网络或作为备用源。
 
-<a class="download-button" href="https://wwbgb.lanzoul.com/b01i61qfba" target="_blank" rel="noopener noreferrer">蓝奏云网盘下载（国内推荐 · Windows x64 · 31.4 MB）</a>
+<div class="dl-grid">
+  <a class="dl-card dl-card--primary" href="https://wwbgb.lanzoul.com/b01i61qfba" target="_blank" rel="noopener noreferrer">
+    <span class="dl-card__tag">国内推荐</span>
+    <span class="dl-card__title">蓝奏云网盘</span>
+    <span class="dl-card__desc">国内访问通常更快，无需代理</span>
+    <span class="dl-card__meta">提取密码 i3xf · 含最近两个版本</span>
+    <span class="dl-card__cta">前往下载 →</span>
+  </a>
+  <a class="dl-card" href="https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.4/AovoCL-Setup-0.2.4-win-x64.exe" target="_blank" rel="noopener noreferrer">
+    <span class="dl-card__tag dl-card__tag--ghost">备用</span>
+    <span class="dl-card__title">GitHub Release 直链</span>
+    <span class="dl-card__desc">官方发布资产，海外网络或已有代理时更稳定</span>
+    <span class="dl-card__meta">AovoCL-Setup-0.2.4-win-x64.exe</span>
+    <span class="dl-card__cta">直接下载 →</span>
+  </a>
+  <a class="dl-card" href="https://wwbgb.lanzoul.com/b01i61qfcb" target="_blank" rel="noopener noreferrer">
+    <span class="dl-card__tag dl-card__tag--ghost">归档</span>
+    <span class="dl-card__title">蓝奏云历史版本</span>
+    <span class="dl-card__desc">早期版本安装包归档，需要旧版时使用</span>
+    <span class="dl-card__meta">提取密码 i3xf · v0.2.0 – v0.2.2</span>
+    <span class="dl-card__cta">查看历史版本 →</span>
+  </a>
+  <a class="dl-card" href="https://github.com/Lucasingh/Lucasingh.github.io/releases" target="_blank" rel="noopener noreferrer">
+    <span class="dl-card__tag dl-card__tag--ghost">全部</span>
+    <span class="dl-card__title">GitHub Releases 列表</span>
+    <span class="dl-card__desc">查看全部发布记录、资产与逐版本更新说明</span>
+    <span class="dl-card__meta">含更新日志与校验信息</span>
+    <span class="dl-card__cta">打开列表 →</span>
+  </a>
+</div>
 
-| 下载方式 | 链接 | 说明 |
-| --- | --- | --- |
-| 蓝奏云网盘（推荐） | [打开下载页](https://wwbgb.lanzoul.com/b01i61qfba) | 最新版文件夹，含最近两个版本；国内访问通常更快；提取密码：`i3xf` |
-| 蓝奏云历史版本 | [查看历史版本](https://wwbgb.lanzoul.com/b01i61qfcb) | 早期版本安装包归档；提取密码：`i3xf` |
-| GitHub Release 直链 | [下载安装包](https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.4/AovoCL-Setup-0.2.4-win-x64.exe) | 官方发布资产；海外网络或已有代理时更稳定 |
-| GitHub Releases 列表 | [查看全部版本](https://github.com/Lucasingh/Lucasingh.github.io/releases) | 可查看历史版本与更新记录 |
 
 ## 安装步骤
 

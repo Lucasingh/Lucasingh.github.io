@@ -6,17 +6,21 @@ const base = process.env.DOCS_BASE || '/'
 export default defineConfig({
   lang: 'zh-CN',
   title: 'AovoCL',
+  titleTemplate: ':title · AovoCL',
   description: 'AovoCL 跨平台 Minecraft 启动器文档',
   base,
   lastUpdated: true,
   metaChunk: true,
   head: [
     ['meta', { name: 'theme-color', content: '#2f6feb' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}favicon.svg` }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'AovoCL 文档' }],
-    ['meta', { property: 'og:description', content: 'AovoCL 跨平台 Minecraft 启动器使用文档' }]
+    ['meta', { property: 'og:description', content: 'AovoCL 跨平台 Minecraft 启动器使用文档' }],
+    ['meta', { property: 'og:image', content: `${base}logo-hero.svg` }]
   ],
   themeConfig: {
+    logo: { src: `${base}logo.svg`, alt: 'AovoCL' },
     nav: [
       { text: '下载', link: '/download' },
       { text: '指南', link: '/guide/getting-started', activeMatch: '/guide/' },

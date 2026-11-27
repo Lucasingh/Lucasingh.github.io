@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="AovoCL">
+  <defs>
+    <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b86f0"/>
+      <stop offset="1" stop-color="#34c3a0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0" stop-color="#2f6feb" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#2f6feb" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="160" cy="160" r="150" fill="url(#glow)"/>
+
+  <g transform="translate(160 160) rotate(-6) translate(-160 -160)">
+    <rect x="58" y="58" width="204" height="204" rx="52" fill="url(#hg)"/>
+    <rect x="58" y="58" width="204" height="204" rx="52" fill="url(#shine)"/>
+    <rect x="58" y="58" width="204" height="204" rx="52" fill="none" stroke="#fff" stroke-opacity=".22"/>
+    <path d="M160 96 233 246h-35l-12-28h-52l-12 28h-35L160 96Zm0 58-16 46h32l-16-46Z"
+          fill="#fff" fill-rule="evenodd"/>
+  </g>
+</svg>

@@ -6,7 +6,10 @@ description: AovoCL 跨平台 Minecraft 启动器使用文档
 hero:
   name: AovoCL
   text: 跨平台 Minecraft 启动器
-  tagline: 参考 PCL2 架构打造 · Windows / Linux / macOS 通用 · 原版一键启动
+  tagline: 参考 PCL2 架构打造 · Windows/Linux/macOS 通用 · 原版一键启动
+  image:
+    src: /logo-hero.svg
+    alt: AovoCL
   actions:
     - theme: brand
       text: 下载启动器
@@ -19,25 +22,51 @@ hero:
       link: /guide/faq
 
 features:
-  - title: 原版一键启动
+  - icon:
+      src: /icons/launch.svg
+    title: 原版一键启动
     details: 自动补全客户端、依赖库与资源文件，逐个 SHA1 校验通过后原子落盘，再拉起游戏。
-  - title: 版本管理
+  - icon:
+      src: /icons/version.svg
+    title: 版本管理
     details: 内置官方版本清单，支持下载、修复、重命名、删除与打开版本目录。
-  - title: 自动 Java
+  - icon:
+      src: /icons/java.svg
+    title: 自动 Java
     details: 扫描本机 Java 并按版本匹配；找不到时自动下载对应 JRE，国内优先清华镜像。
-  - title: 下载加速
+  - icon:
+      src: /icons/speed.svg
+    title: 下载加速
     details: BMCLAPI 镜像 + 多文件并发 + 大文件分片，连接预算可调，镜像异常自动回退官方源。
-  - title: 离线账户
+  - icon:
+      src: /icons/account.svg
+    title: 离线账户
     details: 输入用户名即可进入单人游戏与局域网联机，无需登录。
-  - title: 跨平台
+  - icon:
+      src: /icons/cross.svg
+    title: 跨平台
     details: Core 为纯 .NET 8 类库，桌面端基于 Avalonia 11，同一套逻辑跑三个系统。
 ---
 
 ## 三分钟了解
 
-1. **选择目录**：默认 `%APPDATA%\AovoCL\minecraft`，也可以直接指向官方启动器或 PCL2 的游戏目录。
-2. **选择版本**：在「下载」页搜索并下载目标版本，或直接从已有本地版本中挑选。
-3. **点击启动**：启动器补齐缺失文件、准备 Java、生成启动参数并拉起游戏，日志实时输出到「运行日志」面板。
+<div class="steps">
+  <div class="step">
+    <span class="step__num">01</span>
+    <h3>选择目录</h3>
+    <p>默认 <code>%APPDATA%\AovoCL\minecraft</code>，也可以直接指向官方启动器或 PCL2 的游戏目录。</p>
+  </div>
+  <div class="step">
+    <span class="step__num">02</span>
+    <h3>选择版本</h3>
+    <p>在「下载」页搜索并下载目标版本，或直接从已有本地版本中挑选。</p>
+  </div>
+  <div class="step">
+    <span class="step__num">03</span>
+    <h3>点击启动</h3>
+    <p>启动器补齐缺失文件、准备 Java、生成启动参数并拉起游戏，日志实时输出到「运行日志」面板。</p>
+  </div>
+</div>
 
 首次启动 1.20.1 大约需要下载 700 MB 文件，速度取决于网络与镜像节点。
 
