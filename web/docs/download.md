@@ -9,7 +9,7 @@ tags: [下载, 安装]
 <div class="dl-hero">
   <div class="dl-hero__left">
     <span class="dl-hero__label">最新版本</span>
-    <span class="dl-hero__ver">v0.2.5</span>
+    <span class="dl-hero__ver">v0.2.6</span>
   </div>
   <div class="dl-hero__right">
     <span>Windows 10 / 11 · x64</span>
@@ -30,11 +30,11 @@ tags: [下载, 安装]
     <span class="dl-card__meta">提取密码 i3xf · 含最近两个版本</span>
     <span class="dl-card__cta">前往下载 →</span>
   </a>
-  <a class="dl-card" href="https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.5/AovoCL-Setup-0.2.5-win-x64.exe" target="_blank" rel="noopener noreferrer">
+  <a class="dl-card" href="https://github.com/Lucasingh/Lucasingh.github.io/releases/download/v0.2.6/AovoCL-Setup-0.2.6-win-x64.exe" target="_blank" rel="noopener noreferrer">
     <span class="dl-card__tag dl-card__tag--ghost">备用</span>
     <span class="dl-card__title">GitHub Release 直链</span>
     <span class="dl-card__desc">官方发布资产，海外网络或已有代理时更稳定</span>
-    <span class="dl-card__meta">AovoCL-Setup-0.2.5-win-x64.exe</span>
+    <span class="dl-card__meta">AovoCL-Setup-0.2.6-win-x64.exe</span>
     <span class="dl-card__cta">直接下载 →</span>
   </a>
   <a class="dl-card" href="https://wwbgb.lanzoul.com/b01i61qfcb" target="_blank" rel="noopener noreferrer">
@@ -56,7 +56,7 @@ tags: [下载, 安装]
 
 ## 安装步骤
 
-1. 下载 `AovoCL-Setup-0.2.5-win-x64.exe`。
+1. 下载 `AovoCL-Setup-0.2.6-win-x64.exe`。
 2. 双击安装包并按向导操作；默认仅安装到当前用户目录，无需管理员权限。
 3. 可按需勾选「创建桌面快捷方式」，安装完成后从开始菜单或桌面启动 AovoCL。
 4. 首次启动后在「设置」里确认游戏目录，再到「下载」页选择版本，等待文件补齐后点击启动。
@@ -83,14 +83,21 @@ Windows SmartScreen 可能提示「已保护你的电脑」，这是因为可执
 下载完成后可以核对 SHA256，确认文件完整：
 
 ```powershell
-Get-FileHash .\AovoCL-Setup-0.2.5-win-x64.exe -Algorithm SHA256
+Get-FileHash .\AovoCL-Setup-0.2.6-win-x64.exe -Algorithm SHA256
 ```
 
 ```text
-4a6696abf468d943b8f0a69037ebde0e2a6c79a1df12d0f15e7a54b7119fac20
+4aa0f83a3600e3abbb3af75cc8bb4ba5c94d35ebf2799c73370330f9959e662d
 ```
 
 ## 版本说明
+
+### v0.2.6
+
+- 下载页改为单栏，移除右侧「本地版本」面板，版本列表获得完整宽度
+- 版本列表自适应高度，未选版本时铺满可用空间
+- 「已选版本 / 安装加载器 / 开始下载」改为选中版本后展开
+- 修正「已选」处文件夹名显示错误
 
 ### v0.2.5
 

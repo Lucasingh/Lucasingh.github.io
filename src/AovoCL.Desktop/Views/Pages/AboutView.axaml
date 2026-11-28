@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AovoCL.Desktop.Views.Pages.AboutView">
+
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="16" Spacing="12" MaxWidth="860" HorizontalAlignment="Stretch">
+
+      <Border Classes="card">
+        <Grid ColumnDefinitions="Auto,*">
+          <Border Width="56" Height="56" CornerRadius="16" Background="{DynamicResource AccentBrush}">
+            <TextBlock Text="A" FontSize="26" FontWeight="Bold"
+                       Foreground="{DynamicResource AccentForegroundBrush}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <StackPanel Grid.Column="1" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="2">
+            <TextBlock Text="AovoCL" FontSize="20" FontWeight="Bold" />
+            <TextBlock Text="{Binding Version, StringFormat='版本 {0}'}" Classes="muted" />
+            <TextBlock Text="参考 PCL2 架构的跨平台 Minecraft 启动器" Classes="hint" Margin="0,2,0,0" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="10">
+          <TextBlock Text="运行环境" Classes="h2" />
+          <Grid ColumnDefinitions="110,*" RowDefinitions="Auto,Auto,Auto,Auto" >
+            <TextBlock Text=".NET" Classes="hint" />
+            <TextBlock Grid.Column="1" Text="{Binding Runtime}" FontSize="12.5" />
+            <TextBlock Grid.Row="1" Text="系统" Classes="hint" Margin="0,6,0,0" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Platform}" FontSize="12.5"
+                       Margin="0,6,0,0" TextWrapping="Wrap" />
+            <TextBlock Grid.Row="2" Text="界面" Classes="hint" Margin="0,6,0,0" />
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="Avalonia 11 · Fluent 主题" FontSize="12.5"
+                       Margin="0,6,0,0" />
+            <TextBlock Grid.Row="3" Text="主题" Classes="hint" Margin="0,6,0,0" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Theme.ModeLabel}" FontSize="12.5"
+                       Margin="0,6,0,0" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Text="已实现能力" Classes="h2" />
+          <ItemsControl ItemsSource="{Binding Features}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid ColumnDefinitions="Auto,*" Margin="0,3">
+                  <PathIcon Data="{StaticResource IconCheck}" Width="11" Height="11"
+                            Foreground="{DynamicResource SuccessBrush}" VerticalAlignment="Top"
+                            Margin="0,2,8,0" />
+                  <TextBlock Grid.Column="1" Text="{Binding}" FontSize="12.5"
+                             TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Text="架构说明" Classes="h2" />
+          <TextBlock TextWrapping="Wrap" FontSize="12.5" Foreground="{DynamicResource TextSecondaryBrush}"
+                     Text="界面层只通过 LauncherService 调用启动核心；版本清单、安装、Java 探测与参数拼装都在 AovoCL.Core 中完成，核心不依赖任何 UI 框架，可被 CLI 与其他前端复用。" />
+          <TextBlock Text="当前为离线登录模式，正版登录、整合包与模组管理在后续版本接入。"
+                     Classes="hint" />
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

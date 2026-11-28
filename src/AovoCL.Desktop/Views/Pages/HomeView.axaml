@@ -1,0 +1,205 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AovoCL.Desktop.Views.Pages.HomeView">
+
+  <Grid RowDefinitions="Auto,*,Auto" Margin="20,16,20,16">
+
+    <!-- ================= 顶部工具栏 ================= -->
+    <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto" Margin="0,0,0,12">
+      <TextBlock Grid.Column="0" Text="版本列表" Classes="h2" VerticalAlignment="Center" Margin="0,0,16,0" />
+
+      <!-- 搜索 -->
+      <Border Grid.Column="1" Classes="chip" MaxWidth="320" HorizontalAlignment="Right"
+              VerticalAlignment="Center" Padding="10,5">
+        <Grid ColumnDefinitions="Auto,*">
+          <PathIcon Data="{StaticResource IconSearch}" Width="13" Height="13"
+                    VerticalAlignment="Center" Margin="0,0,6,0" />
+          <TextBox Grid.Column="1" Text="{Binding Filter}" Watermark="搜索版本 / 加载器"
+                   Background="Transparent" BorderThickness="0" VerticalContentAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <!-- 分类筛选 -->
+      <ComboBox Grid.Column="2" Margin="10,0,0,0" MinWidth="96" VerticalAlignment="Center"
+                ItemsSource="{Binding CategoryFilterOptions}"
+                SelectedIndex="{Binding CategoryFilterSelectedIndex, Mode=TwoWay}" />
+
+      <!-- 添加文件夹（纯图标，避免和右侧文件夹下拉重复） -->
+      <Button Grid.Column="3" Classes="ghost" Margin="8,0,0,0" Padding="7,5"
+              VerticalAlignment="Center"
+              Command="{Binding AddFolderCommand}" ToolTip.Tip="添加游戏文件夹">
+        <PathIcon Data="{StaticResource IconFolder}" Width="14" Height="14" />
+      </Button>
+
+      <!-- 刷新 -->
+      <Button Grid.Column="4" Classes="ghost" Margin="6,0,0,0" VerticalAlignment="Center"
+              Command="{Binding RefreshCommand}" ToolTip.Tip="重新扫描版本">
+        <PathIcon Data="{StaticResource IconRefresh}" Width="14" Height="14" />
+      </Button>
+
+      <!-- 当前活动文件夹（只显示名称，路径见悬停提示） -->
+      <ComboBox Grid.Column="5" Margin="8,0,0,0" MinWidth="120" MaxWidth="176" VerticalAlignment="Center"
+                ItemsSource="{Binding GameFolders}"
+                SelectedItem="{Binding ActiveFolder, Mode=TwoWay}"
+                ToolTip.Tip="{Binding ActiveFolder.FolderPath}">
+        <ComboBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold"
+                       TextTrimming="CharacterEllipsis" MaxWidth="140" />
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+    </Grid>
+
+    <!-- ================= 版本卡片网格 ================= -->
+    <Grid Grid.Row="1">
+      <ScrollViewer>
+        <ListBox ItemsSource="{Binding Versions}"
+                 SelectedItem="{Binding SelectedVersion}"
+                 Background="Transparent" BorderThickness="0" Padding="0">
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+          <ListBox.Styles>
+            <Style Selector="ListBoxItem">
+              <Setter Property="Padding" Value="0" />
+              <Setter Property="Margin" Value="0,0,12,12" />
+              <Setter Property="Background" Value="Transparent" />
+              <Setter Property="Template">
+                <ControlTemplate>
+                  <ContentPresenter Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </ControlTemplate>
+              </Setter>
+            </Style>
+            <Style Selector="Border.vcard">
+              <Setter Property="RenderTransform" Value="translateY(0px)" />
+              <Setter Property="Transitions">
+                <Transitions>
+                  <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.16" />
+                  <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.16" />
+                  <BrushTransition Property="BorderBrush" Duration="0:0:0.16" />
+                </Transitions>
+              </Setter>
+            </Style>
+            <Style Selector="Border.vcard:pointerover">
+              <Setter Property="RenderTransform" Value="translateY(-3px)" />
+              <Setter Property="BoxShadow" Value="0 10 22 0 #1F000000" />
+            </Style>
+            <Style Selector="ListBoxItem:selected Border.vcard">
+              <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+              <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+            </Style>
+          </ListBox.Styles>
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Border Classes="card vcard" Width="212" Height="112" Padding="14,12"
+                      CornerRadius="12">
+                <Border.ContextMenu>
+                  <ContextMenu>
+                    <MenuItem Header="启动"
+                              Command="{Binding $parent[ListBox].DataContext.LaunchVersionCommand}"
+                              CommandParameter="{Binding}" />
+                    <MenuItem Header="收藏 / 取消收藏"
+                              Command="{Binding $parent[ListBox].DataContext.ToggleFavoriteCommand}"
+                              CommandParameter="{Binding}" />
+                    <MenuItem Header="切换版本隔离"
+                              Command="{Binding $parent[ListBox].DataContext.ToggleIsolationCommand}"
+                              CommandParameter="{Binding}" />
+                    <MenuItem Header="打开版本目录"
+                              Command="{Binding $parent[ListBox].DataContext.OpenVersionFolderCommand}"
+                              CommandParameter="{Binding}" />
+                    <Separator />
+                    <MenuItem Header="删除版本"
+                              Command="{Binding $parent[ListBox].DataContext.DeleteVersionCommand}"
+                              CommandParameter="{Binding}" />
+                  </ContextMenu>
+                </Border.ContextMenu>
+
+                <Grid RowDefinitions="Auto,*,Auto">
+                  <!-- 版本名 + 收藏星标 -->
+                  <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+                    <!-- 加载器徽章 -->
+                    <Border CornerRadius="5" Padding="5,2" Margin="0,0,8,0"
+                            Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Center">
+                      <TextBlock Text="{Binding LoaderAbbr}" FontSize="10.5" FontWeight="Bold"
+                                 Foreground="{DynamicResource AccentBrush}" />
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="13.5"
+                               FontWeight="SemiBold" VerticalAlignment="Center"
+                               TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding Name}" />
+                    <TextBlock Grid.Column="2" Text="★" FontSize="14" Foreground="#E5A800"
+                               VerticalAlignment="Center" IsVisible="{Binding IsFavorite}" />
+                  </Grid>
+
+                  <!-- 副标题 -->
+                  <TextBlock Grid.Row="1" Text="{Binding Subtitle}" FontSize="11"
+                             Foreground="{DynamicResource TextMutedBrush}"
+                             VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+
+                  <!-- 徽章行 -->
+                  <Grid Grid.Row="2" ColumnDefinitions="Auto,Auto,*">
+                    <Border CornerRadius="4" Padding="5,1"
+                            Background="{DynamicResource AccentSoftBrush}"
+                            IsVisible="{Binding IsIsolatedResolved}" Margin="0,0,5,0">
+                      <TextBlock Text="隔离" FontSize="9.5" Foreground="{DynamicResource AccentBrush}" />
+                    </Border>
+                    <Border Grid.Column="1" CornerRadius="4" Padding="5,1"
+                            Background="{DynamicResource DangerSoftBrush}"
+                            IsVisible="{Binding IsErrorStatus}" Margin="0,0,5,0">
+                      <TextBlock Text="{Binding StatusLabel}" FontSize="9.5"
+                                 Foreground="{DynamicResource DangerBrush}" />
+                    </Border>
+                    <TextBlock Grid.Column="2" Text="{Binding SizeText}" FontSize="9.5"
+                               Foreground="{DynamicResource TextMutedBrush}"
+                               HorizontalAlignment="Right" VerticalAlignment="Center" />
+                  </Grid>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </ScrollViewer>
+    </Grid>
+
+    <!-- ================= 底部启动条 ================= -->
+    <Grid Grid.Row="2" Margin="0,4,0,0">
+
+      <Border Classes="card" Padding="18,14" CornerRadius="14">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel VerticalAlignment="Center" Spacing="3">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="{Binding CurrentVersionId}" FontSize="17" FontWeight="SemiBold"
+                         TextTrimming="CharacterEllipsis" />
+              <Border CornerRadius="4" Padding="6,1" VerticalAlignment="Center"
+                      Background="{DynamicResource DangerSoftBrush}"
+                      IsVisible="{Binding HasCurrentStatusBadge}">
+                <TextBlock Text="{Binding CurrentStatusBadge}" FontSize="10"
+                           Foreground="{DynamicResource DangerBrush}" />
+              </Border>
+              <Border CornerRadius="4" Padding="6,1" VerticalAlignment="Center"
+                      Background="{DynamicResource AccentSoftBrush}"
+                      IsVisible="{Binding HasCurrentIsolationBadge}">
+                <TextBlock Text="{Binding CurrentIsolationBadge}" FontSize="10"
+                           Foreground="{DynamicResource AccentBrush}" />
+              </Border>
+            </StackPanel>
+            <TextBlock Text="{Binding CurrentVersionSubtitle}" FontSize="11.5"
+                       Foreground="{DynamicResource TextMutedBrush}" />
+            <TextBlock Text="{Binding StatusText}" FontSize="11"
+                       Foreground="{DynamicResource TextMutedBrush}" />
+            <ProgressBar Margin="0,4,0,0" Value="{Binding ProgressPercent}"
+                         IsVisible="{Binding IsBusy}" MaxWidth="420" HorizontalAlignment="Left" />
+          </StackPanel>
+
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Button Classes="primary launch" Content="{Binding StartButtonText}"
+                    Command="{Binding StartCommand}" MinWidth="132" />
+          </StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</UserControl>

@@ -1,0 +1,149 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AovoCL.Desktop.Views.UpdateWindow"
+        Title="更新 AovoCL"
+        Width="600" Height="660"
+        CanResize="False"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource AppBackgroundBrush}"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1">
+
+  <Window.Styles>
+    <Style Selector="Button.winbtn">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="26" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
+    <Style Selector="Button.winbtn PathIcon">
+      <Setter Property="Width" Value="10" />
+      <Setter Property="Height" Value="10" />
+      <Setter Property="Foreground" Value="{Binding $parent[Button].Foreground}" />
+    </Style>
+    <Style Selector="Button.winbtn:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
+    <Style Selector="Button.winbtn:pressed">
+      <Setter Property="Background" Value="{DynamicResource ControlPressedBrush}" />
+    </Style>
+    <Style Selector="Button.winclose:pointerover">
+      <Setter Property="Background" Value="{DynamicResource DangerBrush}" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+  </Window.Styles>
+
+  <Grid RowDefinitions="Auto,*">
+
+    <!-- 与主窗口一致的无边框标题栏 -->
+    <Border Height="38" Background="{DynamicResource SidebarBrush}"
+            PointerPressed="OnTitleBarPressed">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Text="{Binding Heading}" FontSize="12" VerticalAlignment="Center"
+                   Margin="16,0,0,0" Foreground="{DynamicResource TextSecondaryBrush}" />
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="2"
+                    Margin="0,0,8,0" VerticalAlignment="Center">
+          <Button Classes="winbtn" Click="OnMinimizeClick" ToolTip.Tip="最小化">
+            <PathIcon Data="{StaticResource IconMinimize}" />
+          </Button>
+          <Button Classes="winbtn winclose" Click="OnCancelClick" ToolTip.Tip="取消并关闭">
+            <PathIcon Data="{StaticResource IconClose}" />
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Grid Grid.Row="1" Margin="20,12,20,18" RowDefinitions="Auto,Auto,Auto,Auto,*,Auto,Auto">
+
+      <!-- 版本与状态 -->
+      <StackPanel Spacing="4">
+        <TextBlock Text="{Binding Heading}" FontSize="17" FontWeight="SemiBold" />
+        <TextBlock Text="多线程分段下载，自动选择最快的下载源"
+                   FontSize="11.5" Foreground="{DynamicResource TextMutedBrush}" />
+      </StackPanel>
+
+      <!-- 百分比、速度、已下载量 -->
+      <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="0,12,0,0">
+        <TextBlock Text="{Binding PercentText}" FontSize="34" FontWeight="Bold"
+                   Foreground="{DynamicResource AccentTextBrush}" VerticalAlignment="Center" />
+        <StackPanel Grid.Column="1" Spacing="3" VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
+          <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Right">
+            <TextBlock Text="下载速度" FontSize="11" Foreground="{DynamicResource TextMutedBrush}"
+                       VerticalAlignment="Center" />
+            <TextBlock Text="{Binding SpeedText}" FontSize="12" FontWeight="SemiBold"
+                       VerticalAlignment="Center" />
+          </StackPanel>
+          <TextBlock Text="{Binding SizeText}" FontSize="10.5"
+                     Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Right" />
+          <TextBlock Text="{Binding EtaText}" FontSize="10.5"
+                     Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Right" />
+        </StackPanel>
+      </Grid>
+
+      <ProgressBar Grid.Row="2" Margin="0,10,0,0" Height="8" MinHeight="8" CornerRadius="4"
+                   Value="{Binding Percent}" />
+
+      <!-- 分线程进度标题 -->
+      <Grid Grid.Row="3" ColumnDefinitions="*,Auto" Margin="0,16,0,8">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Text="下载线程" FontSize="12.5" FontWeight="SemiBold"
+                     VerticalAlignment="Center" />
+          <TextBlock Text="{Binding ThreadsText}" FontSize="11"
+                     Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" />
+        </StackPanel>
+        <TextBlock Grid.Column="1" Text="最多 32 线程" FontSize="10.5"
+                   Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" />
+      </Grid>
+
+      <!-- 每个线程独立进度 -->
+      <Border Grid.Row="4" Classes="card" Padding="10">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <ItemsControl ItemsSource="{Binding Segments}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal" ItemWidth="272" ItemHeight="27" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid ColumnDefinitions="28,*,40,62" Margin="0,0,8,0">
+                  <TextBlock Text="{Binding Label}" FontSize="10" FontFamily="{StaticResource MonoFontFamily}"
+                             Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center" />
+                  <ProgressBar Grid.Column="1" Classes="thin" Value="{Binding Percent}"
+                               VerticalAlignment="Center" Margin="0,0,8,0" />
+                  <TextBlock Grid.Column="2" Text="{Binding PercentText}" FontSize="10.5"
+                             HorizontalAlignment="Right" VerticalAlignment="Center" />
+                  <TextBlock Grid.Column="3" Text="{Binding StateText}" FontSize="10"
+                             Foreground="{DynamicResource TextMutedBrush}" HorizontalAlignment="Right"
+                             VerticalAlignment="Center" />
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </Border>
+
+      <!-- 状态与操作 -->
+      <TextBlock Grid.Row="5" Text="{Binding StatusText}" FontSize="11.5" Margin="0,12,0,0"
+                 TextWrapping="Wrap" Foreground="{DynamicResource AccentTextBrush}"
+                 IsVisible="{Binding IsStatusAccent}" />
+      <TextBlock Grid.Row="5" Text="{Binding StatusText}" FontSize="11.5" Margin="0,12,0,0"
+                 TextWrapping="Wrap" Foreground="{DynamicResource DangerBrush}"
+                 IsVisible="{Binding HasFailed}" />
+
+      <StackPanel Grid.Row="6" Orientation="Horizontal" Spacing="8"
+                  HorizontalAlignment="Right" Margin="0,12,0,0">
+        <Button Classes="ghost" Content="取消下载" MinWidth="88" IsCancel="True"
+                Click="OnCancelClick" IsVisible="{Binding IsDownloading}" />
+        <Button Classes="primary" Content="重试" MinWidth="88"
+                Click="OnRetryClick" IsVisible="{Binding IsRetryVisible}" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

@@ -1,0 +1,247 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AovoCL.Desktop.Views.Pages.DownloadView">
+
+  <Grid Margin="16">
+
+    <!-- ============ 下载新版本 ============ -->
+    <Border Grid.Column="0" Classes="card" Margin="0,0,12,0">
+      <Grid RowDefinitions="Auto,Auto,*">
+
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel>
+            <TextBlock Text="下载游戏版本" Classes="h2" />
+            <TextBlock Text="自动补齐客户端、依赖库与资源文件，SHA1 校验。" Classes="muted"
+                       Margin="0,3,0,0" />
+          </StackPanel>
+          <Button Grid.Column="1" Classes="ghost" Content="刷新清单" FontSize="11.5"
+                  VerticalAlignment="Center" Command="{Binding RefreshCommand}" />
+        </Grid>
+
+        <!-- 当前安装任务：阶段总进度 + 当前下载批次信息 -->
+        <Border Grid.Row="1" Margin="0,12,0,0" Padding="12" CornerRadius="10"
+                Background="{DynamicResource ControlBrush}"
+                BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"
+                IsVisible="{Binding HasTask}">
+          <StackPanel Spacing="7">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="当前安装任务" FontSize="10.5"
+                           Foreground="{DynamicResource TextMutedBrush}" />
+                <TextBlock Text="{Binding CurrentTask.Title}" FontSize="13.5" FontWeight="SemiBold"
+                           Margin="0,2,0,0" TextTrimming="CharacterEllipsis" />
+              </StackPanel>
+              <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{Binding CurrentTask.StatusText}" FontSize="11"
+                           Foreground="{DynamicResource AccentTextBrush}" VerticalAlignment="Center"
+                           IsVisible="{Binding CurrentTask.IsRunning}" />
+                <TextBlock Text="{Binding CurrentTask.StatusText}" FontSize="11"
+                           Foreground="{DynamicResource SuccessBrush}" VerticalAlignment="Center"
+                           IsVisible="{Binding CurrentTask.IsCompleted}" />
+                <TextBlock Text="{Binding CurrentTask.StatusText}" FontSize="11"
+                           Foreground="{DynamicResource TextMutedBrush}" VerticalAlignment="Center"
+                           IsVisible="{Binding CurrentTask.IsCancelled}" />
+                <TextBlock Text="{Binding CurrentTask.StatusText}" FontSize="11"
+                           Foreground="{DynamicResource DangerBrush}" VerticalAlignment="Center"
+                           IsVisible="{Binding CurrentTask.IsFailed}" />
+                <Button Classes="ghost danger" Content="取消" FontSize="11" MinWidth="52"
+                        Padding="8,4" Margin="8,0,0,0" Command="{Binding CancelDownloadCommand}"
+                        IsVisible="{Binding CurrentTask.IsRunning}" />
+              </StackPanel>
+            </Grid>
+
+            <Grid ColumnDefinitions="Auto,*">
+              <TextBlock Text="{Binding CurrentTask.PercentText}" FontSize="24" FontWeight="Bold"
+                         Foreground="{DynamicResource AccentTextBrush}"
+                         ToolTip.Tip="按四个安装阶段计算的总进度" />
+              <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="14"
+                          HorizontalAlignment="Right" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <TextBlock Text="下载速度" FontSize="11"
+                             Foreground="{DynamicResource TextMutedBrush}" />
+                  <TextBlock Text="{Binding CurrentTask.SpeedText}" FontSize="11" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <TextBlock Text="本批剩余" FontSize="11"
+                             Foreground="{DynamicResource TextMutedBrush}" />
+                  <TextBlock Text="{Binding CurrentTask.RemainingText}" FontSize="11" />
+                </StackPanel>
+              </StackPanel>
+            </Grid>
+
+            <ProgressBar Value="{Binding CurrentTask.Percent}"
+                         ToolTip.Tip="按四个安装阶段计算的总进度" />
+
+            <Grid ColumnDefinitions="Auto,*" IsVisible="{Binding CurrentTask.HasCurrentFile}">
+              <TextBlock Text="当前文件" FontSize="10.5" Margin="0,0,6,0"
+                         Foreground="{DynamicResource TextMutedBrush}" />
+              <TextBlock Grid.Column="1" Text="{Binding CurrentTask.CurrentFile}" FontSize="10.5"
+                         Foreground="{DynamicResource TextMutedBrush}"
+                         TextTrimming="CharacterEllipsis" />
+            </Grid>
+
+            <TextBlock Text="{Binding CurrentTask.DetailText}" FontSize="11" MaxLines="3"
+                       TextWrapping="Wrap" Foreground="{DynamicResource DangerBrush}"
+                       IsVisible="{Binding CurrentTask.HasDetail}" />
+
+            <ItemsControl ItemsSource="{Binding CurrentTask.Stages}" Margin="0,2,0,0">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Grid ColumnDefinitions="*,Auto" Margin="0,1">
+                    <TextBlock Text="{Binding Name}" FontSize="11"
+                               Foreground="{DynamicResource TextSecondaryBrush}"
+                               TextTrimming="CharacterEllipsis" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0,0,0">
+                      <TextBlock Text="{Binding StatusText}" FontSize="11"
+                                 Foreground="{DynamicResource TextMutedBrush}"
+                                 IsVisible="{Binding IsWaiting}" />
+                      <TextBlock Text="{Binding StatusText}" FontSize="11"
+                                 Foreground="{DynamicResource AccentTextBrush}"
+                                 IsVisible="{Binding IsActive}" />
+                      <TextBlock Text="{Binding StatusText}" FontSize="11"
+                                 Foreground="{DynamicResource SuccessBrush}"
+                                 IsVisible="{Binding IsCompleted}" />
+                      <TextBlock Text="{Binding StatusText}" FontSize="11"
+                                 Foreground="{DynamicResource TextMutedBrush}"
+                                 IsVisible="{Binding IsCancelled}" />
+                      <TextBlock Text="{Binding StatusText}" FontSize="11"
+                                 Foreground="{DynamicResource DangerBrush}"
+                                 IsVisible="{Binding IsFailed}" />
+                    </StackPanel>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="2" RowDefinitions="Auto,Auto,*" Margin="0,4,0,0">
+
+          <!-- 资源类型：原版游戏 + 后续 Mod / 整合包等 -->
+          <ListBox Classes="segments" Margin="0,4,0,0" ItemsSource="{Binding ResourceKinds}"
+                   SelectedIndex="{Binding SelectedResourceIndex, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+
+          <!-- 社区资源占位 -->
+          <Border Grid.Row="1" Margin="0,12,0,0" Padding="14" CornerRadius="10"
+                  Background="{DynamicResource ControlBrush}"
+                  BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"
+                  IsVisible="{Binding IsComingSoonSelected}">
+            <StackPanel Spacing="6">
+              <TextBlock Text="{Binding ComingSoonTitle}" FontSize="13.5"
+                         FontWeight="SemiBold" />
+              <TextBlock Text="该分类正在开发中，后续版本开放下载；当前可从「原版游戏」安装。"
+                         Classes="hint" />
+            </StackPanel>
+          </Border>
+
+          <!-- 原版游戏安装流程 -->
+          <Grid Grid.Row="2" RowDefinitions="Auto,Auto,*,Auto" IsVisible="{Binding IsVanillaSelected}">
+
+            <ScrollViewer Margin="0,12,0,0" HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Disabled">
+              <ListBox Classes="segments" ItemsSource="{Binding CategoryFilter.Options}"
+                       SelectedIndex="{Binding CategoryFilter.SelectedIndex, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Display}" />
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+            </ScrollViewer>
+
+            <StackPanel Grid.Row="1">
+              <TextBox Margin="0,8,0,0" Text="{Binding Search}"
+                       Watermark="搜索版本号，如 1.20.1…" />
+              <TextBlock Text="{Binding RemoteFilterText}" Classes="hint" Margin="0,8,0,0" />
+            </StackPanel>
+
+            <ListBox Grid.Row="2" Margin="0,6,0,0" ItemsSource="{Binding RemoteVersions}"
+                     SelectedItem="{Binding SelectedVersion, Mode=TwoWay}">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Spacing="3" Margin="0,2">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <TextBlock Text="{Binding Id}" FontSize="13" FontWeight="SemiBold" />
+                      <Border Classes="chip" Padding="7,1" IsVisible="{Binding IsInstalled}">
+                        <TextBlock Text="已安装" FontSize="10"
+                                   Foreground="{DynamicResource SuccessBrush}" />
+                      </Border>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Subtitle}" FontSize="11"
+                               Foreground="{DynamicResource TextMutedBrush}" />
+                    <ProgressBar Classes="thin" Margin="0,3,0,0" Value="{Binding Percent}"
+                                 IsVisible="{Binding IsDownloading}" />
+                    <TextBlock Text="{Binding StatusText}" FontSize="11"
+                               Foreground="{DynamicResource AccentTextBrush}"
+                               IsVisible="{Binding IsDownloading}" />
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+
+            <StackPanel Grid.Row="3" IsVisible="{Binding HasSelectedVersion}">
+              <Border Margin="0,8,0,0" Padding="10,7" CornerRadius="9"
+                      Background="{DynamicResource ControlBrush}"
+                      BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1">
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                  <TextBlock Text="已选" Classes="label" />
+                  <TextBlock Grid.Column="1" Text="{Binding SelectedVersionText}" FontSize="12.5"
+                             FontWeight="SemiBold" Margin="8,0,0,0"
+                             TextTrimming="CharacterEllipsis" />
+                  <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="5"
+                              Margin="10,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="文件夹" FontSize="10.5"
+                               Foreground="{DynamicResource TextMutedBrush}" />
+                    <TextBlock Text="{Binding SelectedFolderText}" FontSize="10.5"
+                               Foreground="{DynamicResource TextMutedBrush}"
+                               MaxWidth="130" TextTrimming="CharacterEllipsis" />
+                  </StackPanel>
+                </Grid>
+              </Border>
+
+              <TextBlock Text="2  安装加载器" Classes="section" Margin="0,10,0,4" />
+              <TextBlock Text="Forge / Fabric 等加载器后续版本开放，当前仅安装原版。"
+                         Classes="hint" Margin="0,0,0,5" />
+
+              <ItemsControl ItemsSource="{Binding LoaderOptions}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <UniformGrid Columns="2" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Border Margin="0,0,6,6" Padding="9,6" CornerRadius="8"
+                            Background="{DynamicResource ControlBrush}"
+                            BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1">
+                      <Grid ColumnDefinitions="Auto,*,Auto">
+                        <Ellipse Width="6" Height="6" Fill="{DynamicResource TextMutedBrush}"
+                                 VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="1" Text="{Binding Name}" FontSize="12"
+                                   Margin="7,0,0,0" />
+                        <TextBlock Grid.Column="2" Text="{Binding Status}" FontSize="10.5"
+                                   Foreground="{DynamicResource TextMutedBrush}"
+                                   VerticalAlignment="Center" />
+                      </Grid>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+
+              <Button Classes="primary" Content="开始下载" Height="36" CornerRadius="10"
+                      HorizontalAlignment="Stretch" Margin="0,6,0,0"
+                      Command="{Binding StartDownloadCommand}" />
+            </StackPanel>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Border>
+
+  </Grid>
+</UserControl>

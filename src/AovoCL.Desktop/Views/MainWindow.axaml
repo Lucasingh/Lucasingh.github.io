@@ -1,0 +1,202 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="AovoCL.Desktop.Views.MainWindow"
+        Title="AovoCL 启动器"
+        Width="1180" Height="780" MinWidth="860" MinHeight="580"
+        Background="{DynamicResource AppBackgroundBrush}"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        WindowStartupLocation="CenterScreen">
+
+  <Window.Styles>
+    <Style Selector="Button.winbtn">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="26" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}" />
+    </Style>
+    <Style Selector="Button.winbtn PathIcon">
+      <Setter Property="Width" Value="10" />
+      <Setter Property="Height" Value="10" />
+      <Setter Property="Foreground" Value="{Binding $parent[Button].Foreground}" />
+    </Style>
+    <Style Selector="Button.winbtn:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ControlHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}" />
+    </Style>
+    <Style Selector="Button.winbtn:pressed">
+      <Setter Property="Background" Value="{DynamicResource ControlPressedBrush}" />
+    </Style>
+    <Style Selector="Border.sidebar TextBlock.navlabel">
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.16" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.sidebar.collapsed TextBlock.navlabel">
+      <Setter Property="Opacity" Value="0" />
+    </Style>
+    <Style Selector="Border.sidebar">
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.22" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.navtoggle PathIcon">
+      <Setter Property="RenderTransform" Value="rotate(0deg)" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.22" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Button.navtoggle.collapsed PathIcon">
+      <Setter Property="RenderTransform" Value="rotate(180deg)" />
+    </Style>
+    <Style Selector="Button.winclose:pointerover">
+      <Setter Property="Background" Value="{DynamicResource DangerBrush}" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+  </Window.Styles>
+
+  <Grid x:Name="RootGrid" RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*">
+
+    <!-- ============ 自定义标题栏 ============ -->
+    <Border Grid.Row="0" Grid.ColumnSpan="2" Height="38"
+            Background="{DynamicResource SidebarBrush}"
+            PointerPressed="OnTitleBarPressed">
+      <Grid ColumnDefinitions="*,Auto">
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="2"
+                    Margin="0,0,8,0" VerticalAlignment="Center">
+          <Button Classes="winbtn" Click="OnMinimizeClick" ToolTip.Tip="最小化">
+            <PathIcon Data="{StaticResource IconMinimize}" />
+          </Button>
+          <Button Classes="winbtn" Click="OnToggleMaximizeClick" ToolTip.Tip="最大化 / 还原">
+            <PathIcon Data="{StaticResource IconMaximize}" />
+          </Button>
+          <Button Classes="winbtn winclose" Click="OnCloseClick" ToolTip.Tip="关闭">
+            <PathIcon Data="{StaticResource IconClose}" />
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- ============ 左侧导航 ============ -->
+    <Border Grid.Row="1" Grid.Column="0" Classes="sidebar" Width="{Binding NavWidth}"
+            Classes.collapsed="{Binding IsNavCollapsed}"
+            ClipToBounds="True"
+            Background="{DynamicResource SidebarBrush}"
+            BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,1,0">
+      <Grid RowDefinitions="*,Auto">
+
+        <ListBox Grid.Row="0" Classes="nav" Margin="0,14,0,0"
+                 ItemsSource="{Binding NavItems}"
+                 SelectedItem="{Binding SelectedNav}">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <Grid ColumnDefinitions="Auto,*">
+                <PathIcon Data="{Binding Icon}" Width="16" Height="16" />
+                <TextBlock Grid.Column="1" Classes="navlabel" Text="{Binding Title}" FontSize="12.5"
+                           Margin="10,0,0,0" VerticalAlignment="Center" />
+              </Grid>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Grid.Row="1" Classes="ghost navtoggle" Margin="8,6,8,10"
+                Classes.collapsed="{Binding IsNavCollapsed}"
+                Command="{Binding ToggleNavCommand}"
+                IsVisible="{Binding IsNavToggleVisible}"
+                ToolTip.Tip="{Binding NavToggleText}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <PathIcon Data="{StaticResource IconCollapse}" Width="13" Height="13" />
+            <TextBlock Text="{Binding NavToggleText}" FontSize="11"
+                       IsVisible="{Binding IsNavExpanded}" />
+          </StackPanel>
+        </Button>
+      </Grid>
+    </Border>
+
+    <!-- ============ 右侧主区 ============ -->
+    <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="Auto,*">
+
+      <Border Background="{DynamicResource SidebarBrush}"
+              BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,0,0,1"
+              Padding="20,10">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="{Binding PageTitle}" FontSize="16" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding PageSubtitle}" FontSize="11.5"
+                       Foreground="{DynamicResource TextMutedBrush}" Margin="0,2,0,0" />
+          </StackPanel>
+
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <Button Classes="chip" Command="{Binding GoHomeCommand}" ToolTip.Tip="当前启动版本">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <PathIcon Data="{StaticResource IconLaunch}" Width="11" Height="11"
+                          Classes="accent" />
+                <TextBlock Text="{Binding Home.CurrentVersionId}" FontSize="11.5"
+                           MaxWidth="130" TextTrimming="CharacterEllipsis"
+                           Foreground="{DynamicResource AccentTextBrush}" />
+              </StackPanel>
+            </Button>
+
+            <Button Classes="chip" Command="{Binding GoSettingsCommand}" ToolTip.Tip="离线账号">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <PathIcon Data="{StaticResource IconUser}" Width="12" Height="12" />
+                <TextBlock Text="{Binding Settings.Username}" FontSize="11.5"
+                           MaxWidth="110" TextTrimming="CharacterEllipsis" />
+              </StackPanel>
+            </Button>
+
+            <Button Classes="chip" Command="{Binding Theme.CycleCommand}"
+                    ToolTip.Tip="{Binding Theme.ModeLabel}">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <PathIcon Data="{StaticResource IconTheme}" Width="12" Height="12" />
+                <TextBlock Text="{Binding Theme.ModeLabel}" FontSize="11.5" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 页面在启动时预加载，切换时不再现建控件 -->
+      <TransitioningContentControl x:Name="PageHost" Grid.Row="1"
+                                   PageTransition="{StaticResource PageTransition}" />
+    </Grid>
+
+    <!-- ============ 底部状态栏 ============ -->
+    <Border Grid.Row="2" Grid.ColumnSpan="2"
+            Background="{DynamicResource SidebarBrush}"
+            BorderBrush="{DynamicResource DividerBrush}" BorderThickness="0,1,0,0"
+            Padding="16,7">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+        <Ellipse Width="7" Height="7" Fill="{DynamicResource AccentBrush}"
+                 VerticalAlignment="Center" />
+        <TextBlock Grid.Column="1" Text="{Binding Status.Text}" Margin="8,0,0,0"
+                   FontSize="11.5" Foreground="{DynamicResource TextSecondaryBrush}"
+                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+        <TextBlock Grid.Column="2" Text="{Binding Status.Detail}" Margin="14,0,0,0"
+                   FontSize="11.5" Foreground="{DynamicResource TextMutedBrush}"
+                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="420" />
+        <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="10" Margin="12,0,0,0">
+          <TextBlock Text="{Binding Status.Speed}" FontSize="11.5"
+                     Foreground="{DynamicResource TextSecondaryBrush}"
+                     VerticalAlignment="Center" IsVisible="{Binding Status.HasSpeed}" />
+          <ProgressBar Width="140" Height="5" Value="{Binding Status.Progress}"
+                       VerticalAlignment="Center"
+                       IsVisible="{Binding Status.IsProgressVisible}" />
+          <TextBlock Text="{Binding Status.ProgressText}" Width="36" FontSize="11.5"
+                     Foreground="{DynamicResource TextMutedBrush}" TextAlignment="Right"
+                     VerticalAlignment="Center"
+                     IsVisible="{Binding Status.IsProgressVisible}" />
+        </StackPanel>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>

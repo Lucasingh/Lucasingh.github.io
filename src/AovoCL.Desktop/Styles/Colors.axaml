@@ -1,0 +1,116 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- 与主题无关的共享资源 -->
+  <FontFamily x:Key="MonoFontFamily">Cascadia Mono,Consolas,Menlo,DejaVu Sans Mono,monospace</FontFamily>
+  <CompositePageTransition x:Key="PageTransition">
+    <CrossFade Duration="0:0:0.18" />
+    <PageSlide Duration="0:0:0.24" Orientation="Vertical" />
+  </CompositePageTransition>
+
+  <ResourceDictionary.ThemeDictionaries>
+    <!-- 浅色主题 -->
+    <ResourceDictionary x:Key="Light">
+      <Color x:Key="SystemAccentColor">#1B7DE0</Color>
+      <Color x:Key="SystemAccentColorLight1">#2E8CE8</Color>
+      <Color x:Key="SystemAccentColorLight2">#4A9CEE</Color>
+      <Color x:Key="SystemAccentColorLight3">#67ACF2</Color>
+      <Color x:Key="SystemAccentColorDark1">#166FC9</Color>
+      <Color x:Key="SystemAccentColorDark2">#125FB0</Color>
+      <Color x:Key="SystemAccentColorDark3">#0F5098</Color>
+
+      <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F4F6FA" />
+      <SolidColorBrush x:Key="SidebarBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="CardBrush" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="CardBorderBrush" Color="#E6EBF2" />
+      <SolidColorBrush x:Key="DividerBrush" Color="#E9EEF5" />
+      <SolidColorBrush x:Key="TextPrimaryBrush" Color="#1F2933" />
+      <SolidColorBrush x:Key="TextSecondaryBrush" Color="#5A6978" />
+      <SolidColorBrush x:Key="TextMutedBrush" Color="#8A97A6" />
+
+      <SolidColorBrush x:Key="ControlBrush" Color="#EEF2F7" />
+      <SolidColorBrush x:Key="ControlHoverBrush" Color="#E3E9F2" />
+      <SolidColorBrush x:Key="ControlPressedBrush" Color="#D8E0EB" />
+      <SolidColorBrush x:Key="ChipBrush" Color="#EEF2F7" />
+
+      <SolidColorBrush x:Key="AccentBrush" Color="#1B7DE0" />
+      <SolidColorBrush x:Key="AccentHoverBrush" Color="#166FC9" />
+      <SolidColorBrush x:Key="AccentPressedBrush" Color="#125FB0" />
+      <SolidColorBrush x:Key="AccentSoftBrush" Color="#E7F1FC" />
+      <SolidColorBrush x:Key="AccentTextBrush" Color="#1466B8" />
+      <SolidColorBrush x:Key="AccentForegroundBrush" Color="#FFFFFF" />
+
+      <SolidColorBrush x:Key="SuccessBrush" Color="#15915B" />
+      <SolidColorBrush x:Key="DangerBrush" Color="#D0463C" />
+      <SolidColorBrush x:Key="LogBackgroundBrush" Color="#F7F9FC" />
+
+      <!-- Fluent 控件调色 -->
+      <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FBFCFE" />
+      <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF" />
+      <SolidColorBrush x:Key="TextControlBorderBrush" Color="#DCE3EC" />
+      <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="#C9D3E0" />
+      <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#1B7DE0" />
+      <SolidColorBrush x:Key="TextControlForeground" Color="#1F2933" />
+      <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#1F2933" />
+      <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#1F2933" />
+      <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#9AA7B5" />
+      <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#9AA7B5" />
+      <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#9AA7B5" />
+      <SolidColorBrush x:Key="ProgressBarForeground" Color="#1B7DE0" />
+      <SolidColorBrush x:Key="ProgressBarBackground" Color="#E3E9F2" />
+    </ResourceDictionary>
+
+    <!-- 深色主题 -->
+    <ResourceDictionary x:Key="Dark">
+      <Color x:Key="SystemAccentColor">#3D8BFD</Color>
+      <Color x:Key="SystemAccentColorLight1">#5A9DFD</Color>
+      <Color x:Key="SystemAccentColorLight2">#77AEFE</Color>
+      <Color x:Key="SystemAccentColorLight3">#94BFFE</Color>
+      <Color x:Key="SystemAccentColorDark1">#2F7BE8</Color>
+      <Color x:Key="SystemAccentColorDark2">#2469CE</Color>
+      <Color x:Key="SystemAccentColorDark3">#1C59B2</Color>
+
+      <SolidColorBrush x:Key="AppBackgroundBrush" Color="#0F141A" />
+      <SolidColorBrush x:Key="SidebarBrush" Color="#171D26" />
+      <SolidColorBrush x:Key="CardBrush" Color="#171E27" />
+      <SolidColorBrush x:Key="CardBorderBrush" Color="#242E3A" />
+      <SolidColorBrush x:Key="DividerBrush" Color="#242E3A" />
+      <SolidColorBrush x:Key="TextPrimaryBrush" Color="#E7EDF4" />
+      <SolidColorBrush x:Key="TextSecondaryBrush" Color="#A7B4C2" />
+      <SolidColorBrush x:Key="TextMutedBrush" Color="#7A8796" />
+
+      <SolidColorBrush x:Key="ControlBrush" Color="#212C38" />
+      <SolidColorBrush x:Key="ControlHoverBrush" Color="#2A3745" />
+      <SolidColorBrush x:Key="ControlPressedBrush" Color="#334253" />
+      <SolidColorBrush x:Key="ChipBrush" Color="#1E2833" />
+
+      <SolidColorBrush x:Key="AccentBrush" Color="#3D8BFD" />
+      <SolidColorBrush x:Key="AccentHoverBrush" Color="#5A9DFD" />
+      <SolidColorBrush x:Key="AccentPressedBrush" Color="#2F7BE8" />
+      <SolidColorBrush x:Key="AccentSoftBrush" Color="#1B2B42" />
+      <SolidColorBrush x:Key="AccentTextBrush" Color="#82B7FA" />
+      <SolidColorBrush x:Key="AccentForegroundBrush" Color="#FFFFFF" />
+
+      <SolidColorBrush x:Key="SuccessBrush" Color="#4FCF8E" />
+      <SolidColorBrush x:Key="DangerBrush" Color="#F07C72" />
+      <SolidColorBrush x:Key="LogBackgroundBrush" Color="#0C1117" />
+
+      <!-- Fluent 控件调色 -->
+      <SolidColorBrush x:Key="TextControlBackground" Color="#1B232D" />
+      <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#1F2833" />
+      <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#141B23" />
+      <SolidColorBrush x:Key="TextControlBorderBrush" Color="#2A3542" />
+      <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="#374556" />
+      <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#3D8BFD" />
+      <SolidColorBrush x:Key="TextControlForeground" Color="#E7EDF4" />
+      <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#E7EDF4" />
+      <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#E7EDF4" />
+      <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#6E7C8C" />
+      <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#6E7C8C" />
+      <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#6E7C8C" />
+      <SolidColorBrush x:Key="ProgressBarForeground" Color="#3D8BFD" />
+      <SolidColorBrush x:Key="ProgressBarBackground" Color="#242E3A" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

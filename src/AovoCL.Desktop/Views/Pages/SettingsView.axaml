@@ -1,0 +1,153 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="AovoCL.Desktop.Views.Pages.SettingsView">
+
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="16" Spacing="12" MaxWidth="860" HorizontalAlignment="Stretch">
+
+      <!-- 账号 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="账号" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="离线登录" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="6">
+            <TextBox Text="{Binding Settings.Username}" Width="240" HorizontalAlignment="Left"
+                     Watermark="离线模式玩家名" />
+            <TextBlock Text="离线模式下用户名即游戏内名称；微软正版登录将在后续版本接入。"
+                       Classes="hint" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 游戏目录 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="游戏目录" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text=".minecraft 位置" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <Grid Grid.Column="1" ColumnDefinitions="*,Auto">
+            <TextBox Text="{Binding Settings.GameRoot}" Watermark="例如 D:\Games\.minecraft" />
+            <Button Grid.Column="1" Content="浏览…" Margin="8,0,0,0"
+                    Command="{Binding BrowseFolderCommand}" />
+          </Grid>
+        </Grid>
+      </Border>
+
+      <!-- Java -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="Java 运行时" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="留空自动处理" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="6">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBox Text="{Binding Settings.JavaPath}"
+                       Watermark="留空则自动探测，必要时下载 JRE" />
+              <Button Grid.Column="1" Content="自动检测" Margin="8,0,0,0"
+                      Command="{Binding DetectJavaCommand}" />
+            </Grid>
+            <TextBlock Text="{Binding JavaStatus}" Classes="hint" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 内存 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="内存分配" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="1 GB – 16 GB" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <Grid Grid.Column="1" ColumnDefinitions="*,Auto">
+            <Slider Minimum="1024" Maximum="16384" TickFrequency="512" IsSnapToTickEnabled="True"
+                    Value="{Binding Settings.MemoryMb}" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Text="{Binding Settings.MemoryText}" Width="84"
+                       TextAlignment="Right" FontSize="12.5" VerticalAlignment="Center" />
+          </Grid>
+        </Grid>
+      </Border>
+
+      <!-- 下载源 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="下载源" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="镜像加速" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="6">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="使用 BMCLAPI 镜像加速下载" FontSize="12.5" VerticalAlignment="Center" />
+              <ToggleSwitch Grid.Column="1" IsChecked="{Binding Settings.UseMirror}"
+                            OnContent="" OffContent="" VerticalAlignment="Center" />
+            </Grid>
+            <TextBlock Text="镜像失败时会自动回退到官方源；关闭后全部走官方源。"
+                       Classes="hint" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 下载性能 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="下载性能" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="并发与分片" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="8">
+            <Grid ColumnDefinitions="*,Auto">
+              <Slider Minimum="4" Maximum="32" TickFrequency="4" IsSnapToTickEnabled="True"
+                      Value="{Binding Settings.DownloadConcurrency}" VerticalAlignment="Center" />
+              <TextBlock Grid.Column="1" Text="{Binding Settings.DownloadConcurrencyText}" Width="88"
+                         TextAlignment="Right" FontSize="12.5" VerticalAlignment="Center" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="大文件分片下载（≥ 4 MB，需服务器支持 Range）" FontSize="12.5"
+                         VerticalAlignment="Center" />
+              <ToggleSwitch Grid.Column="1" IsChecked="{Binding Settings.UseSlicedDownload}"
+                            OnContent="" OffContent="" VerticalAlignment="Center" />
+            </Grid>
+            <TextBlock Text="并发数是单文件与分片共享的连接总预算；分片失败会重试并回退官方源，不支持 Range 时自动改走单连接。"
+                       Classes="hint" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 更新 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="更新" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="{Binding CurrentVersionText}" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="8">
+            <Button Classes="ghost" Content="检查更新" HorizontalAlignment="Left"
+                    Command="{Binding CheckUpdateCommand}" />
+            <TextBlock Text="启动时会自动检查；发现新版本会展示更新内容，确认后在新窗口里多线程下载并静默安装。"
+                       Classes="hint" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- 外观 -->
+      <Border Classes="card">
+        <Grid ColumnDefinitions="150,*">
+          <StackPanel>
+            <TextBlock Text="外观" FontSize="13" FontWeight="SemiBold" />
+            <TextBlock Text="主题模式" Classes="hint" Margin="0,4,0,0" />
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="8">
+            <ListBox Classes="segments" ItemsSource="{Binding ThemeOptions}"
+                     SelectedIndex="{Binding Theme.SelectedIndex}" />
+            <TextBlock Text="跟随系统时由操作系统决定浅色或深色，主色与控件配色随主题一起切换。"
+                       Classes="hint" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>
